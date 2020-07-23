@@ -82,12 +82,13 @@ const Mutation = new GraphQLObjectType({
                     age: args.age
                 })
 
-                author.save
+                return author.save()
             }
         }
     }
 })
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
 })
