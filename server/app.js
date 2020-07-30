@@ -2,8 +2,10 @@ const express = require('express')
 const {graphqlHTTP} = require('express-graphql')
 const schema = require('./schema/schema')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 
 // Connect to mlab DataBase
 mongoose.connect('mongodb+srv://admin:admin1234@cluster0.qd1jj.mongodb.net/<dbname>?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true })
