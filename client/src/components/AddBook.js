@@ -1,14 +1,7 @@
 import React from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import { ADD_BOOK } from '../queries/queries'
 
-const ADD_BOOK = gql`
-    query addBook {
-        authors {
-            name
-            id
-        }
-    }
-`
 
 const AddBook = () => {
 
@@ -17,18 +10,36 @@ const AddBook = () => {
     if(loading) return <p>Loading...</p>
     if(error) return <p>Something Wrong</p>
 
-    const displayAuthors = data.authors.map(author =>{
+    const displayAuthors = data.authors.map(author => {
         return(
-            <li key={author.id}>{author.name}</li>
+            <option key={author.id} value={author.id}>{author.name}</option>
         )
     })
 
     return(
         <>
             <h1>Authors:</h1>
-            <ul>
-                {displayAuthors}
-            </ul>
+
+            <form id="add-book">
+                <div className="field">
+                    <label>Book name:</label>
+                    <input type="text" />
+                </div>
+
+                <div className="field">
+                    <label>Genre:</label>
+                    <input type="text" />
+                </div>
+
+                <div className="field">
+                    <label>Author:</label>
+                    <select>
+                        <option>Select author</option>
+                        {displayAuthors}
+                    </select>
+                </div>
+                <button>+</button>
+            </form>
         </>
     )
 }
